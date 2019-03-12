@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProCP.Car">
+    <Position X="3" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAACAAAAQAAEIAABCAEAAUQAEAAAAAAgAAA=</HashCode>
+      <FileName>Car.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.208" />
+  </Class>
+  <Class Name="ProCP.Pedestrian">
+    <Position X="5.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pedestrian.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProCP.Crossing">
+    <Position X="8.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQEAAABgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Road.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProCP.Road">
+    <Position X="10" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Road.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProCP.Intersection">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABQuAAAAAAAEAAAAABgCAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Intersection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ProCP.TrafficMember">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TrafficMember.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
