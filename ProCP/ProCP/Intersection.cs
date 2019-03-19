@@ -5,10 +5,8 @@ using System.Text;
 
 namespace ProCP
 {
-    public class Intersection
+    public class Intersection : Road
     {
-        private int centerX;
-        private int centerY;
         private int lengthSmallSqSide;
         private int lengthBigSqSide;
         double MPIN1X, MPIN2X, MPIN3X, MPIN4X;
@@ -16,7 +14,8 @@ namespace ProCP
         double MPOUT1X, MPOUT2X, MPOUT3X, MPOUT4X;
         double MPOUT1Y, MPOUT2Y, MPOUT3Y, MPOUT4Y;
 
-        public Intersection(int x, int y)
+        public Intersection(int cX, int cY)
+            :base(cX, cY)
         {
             lengthBigSqSide = 20;
             lengthSmallSqSide = lengthBigSqSide / 2;
@@ -27,26 +26,30 @@ namespace ProCP
         {
             int quarter = lengthBigSqSide / 4;
 
-            MPIN1X = centerX + lengthSmallSqSide;
-            MPIN1Y = centerY + quarter;
-            MPOUT1X = centerX + quarter;
-            MPOUT1Y = centerY + lengthSmallSqSide;
+            MPIN1X = CenterX + lengthSmallSqSide;
+            MPIN1Y = CenterY + quarter;
+            MPOUT1X = CenterX + quarter;
+            MPOUT1Y = CenterY + lengthSmallSqSide;
 
-            MPIN2X = centerX - quarter;
-            MPIN2Y = centerY + lengthSmallSqSide;
-            MPOUT2X = centerX - lengthSmallSqSide;
-            MPOUT2Y = centerY + quarter;
+            MPIN2X = CenterX - quarter;
+            MPIN2Y = CenterY + lengthSmallSqSide;
+            MPOUT2X = CenterX - lengthSmallSqSide;
+            MPOUT2Y = CenterY + quarter;
 
-            MPIN3X = centerX - lengthSmallSqSide;
-            MPIN3Y = centerY - quarter;
-            MPOUT3X = centerX - quarter;
-            MPOUT3Y = centerY - lengthSmallSqSide;
+            MPIN3X = CenterX - lengthSmallSqSide;
+            MPIN3Y = CenterY - quarter;
+            MPOUT3X = CenterX - quarter;
+            MPOUT3Y = CenterY - lengthSmallSqSide;
 
-            MPIN4X = centerX + quarter;
-            MPIN4Y = centerY - lengthSmallSqSide;
-            MPOUT4X = centerX + lengthSmallSqSide;
-            MPOUT4Y = centerY - quarter;
-
+            MPIN4X = CenterX + quarter;
+            MPIN4Y = CenterY - lengthSmallSqSide;
+            MPOUT4X = CenterX + lengthSmallSqSide;
+            MPOUT4Y = CenterY - quarter;
         }
+
+        //Turn right -> same square out
+        //Turn left -> if 1/2 then +2 index out or if 3/4 then -2 index out
+        //Go straight -> +1 index out
+        //U-turn -> -1 index out
     }
 }

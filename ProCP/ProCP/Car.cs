@@ -132,7 +132,7 @@ namespace ProCP
             }
         }
 
-        public void facingForward(Car c)
+        public void facingForward()
         {
             if (!breaks)
             {
