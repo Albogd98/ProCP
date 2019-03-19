@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProCP
 {
-    public class Car : TrafficMember
+    public class Car
     {
-        private int speed;
-        private int acceleration;
-        private int positionX;
-        private int prev_positionx;
-        private int positionY;
-        private int prev_positiony;
-        private double netDistance;
-        private bool breaks;
-        private string ffvar;
+        private int _speed;
+        private int _acceleration;
+        private Position _current;
+        private Position _previous;
+        private double _netDistance;
+        private bool _breaks;
 
         public int Speed
         {
@@ -26,30 +23,29 @@ namespace ProCP
             }
         }
 
-        public int PositionX { get { return positionX; } set { positionX = value; } }
-        public int PositionY { get { return positionY; } set { positionY = value; } }
-        public string fFVar { get { return ffvar; } set { ffvar = value; } }
+        public int PositionX { get { return _current.X; } set { _current.X = value; } }
+        public int PositionY { get { return _current.Y; } set { _current.Y = value; } }
 
         public Car(int s, int a, int px, int py)
         {
-            speed = s;
-            acceleration = a;
-            positionX = px;
-            positionY = py;
-            breaks = false;
+            _speed = s;
+            _acceleration = a;
+            _current.X = px;
+            _current.Y = py;
+            _breaks = false;
         }
 
         public void Break()
         {
-            speed = 0;
-            breaks = true;
+            _speed = 0;
+            _breaks = true;
         }
 
         public void Accelerate()
         {
-            while (speed < acceleration)
+            while (_speed < _acceleration)
             {
-                speed++;
+                _speed++;
             }
         }
 
@@ -62,102 +58,81 @@ namespace ProCP
 
         public void MoveForward()
         {
-            switch (ffvar)
+            switch (_facingForward)
             {
                 case "Left":
-                    positionX--;
+                    _current.X--;
                     break;
                 case "Right":
-                    positionX++;
+                    _current.X++;
                     break;
                 case "Up":
-                    positionY++;
+                    _current.Y++;
                     break;
                 case "Down":
-                    positionY--;
+                    _current.Y--;
                     break;
             }
         }
 
         public void TurnLeft()
         {
-            switch (ffvar)
+            switch (_facingForward)
             {
                 case "Left":
-                    positionX--;
-                    positionY--;
+                    _current.X--;
+                    _current.Y--;
                     break;
                 case "Right":
-                    positionX++;
-                    positionY++;
+                    _current.X++;
+                    _current.Y++;
                     break;
                 case "Up":
-                    positionX--;
-                    positionY++;
+                    _current.X--;
+                    _current.Y++;
                     break;
                 case "Down":
-                    positionX++;
-                    positionY--;
+                    _current.X++;
+                    _current.Y--;
                     break;
             }
         }
 
         public void TurnRight()
         {
-            switch (ffvar)
+            switch (_facingForward)
             {
                 case "Left":
-                    positionX++;
+                    _current.X++;
                     break;
                 case "Right":
-                    positionX--;
+                    _current.X--;
                     break;
                 case "Up":
-                    positionY--;
+                    _current.Y--;
                     break;
                 case "Down":
-                    positionY++;
+                    _current.Y++;
                     break;
             }
         }
 
         public void U_Turn()
         {
-            switch (ffvar)
+            switch (_facingForward)
             {
                 case "Left":
-                    positionX++;
+                    _current.X++;
                     break;
                 case "Right":
-                    positionX--;
+                    _current.X--;
                     break;
                 case "Up":
-                    positionY--;
+                    _current.Y--;
                     break;
                 case "Down":
-                    positionY++;
+                    _current.Y++;
                     break;
-            }
-        }
-
-        public void facingForward()
-        {
-            if (!breaks)
-            {
-                if (positionX < prev_positionx)
-                {
-                    ffvar = "Left";
-                }
-                else if (positionX > prev_positionx)
-                {
-                    ffvar = "Right";
-                }
-                else if (positionY < prev_positiony)
-                {
-                    ffvar = "Down";
-                }
-                else
-                    ffvar = "Up";
             }
         }
     }
