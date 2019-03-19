@@ -7,10 +7,19 @@ namespace ProCP
 {
     public class Crossing
     {
+        private int ccenterX;
+        public int CCenterX { get { return ccenterX; } set { ccenterX = value; } }
+        private int ccenterY;
+        public int CCenterY { get { return ccenterY; } set { ccenterY = value; } }
         private int length;
         private int width;
-        private int centerX;
-        private int centerY;
+        Intersection intSec;
+
+        public Crossing(int cX, int cY)
+        {
+            CCenterX = ccenterX;
+            CCenterY = ccenterY;
+        }
     }
 
     public class Road

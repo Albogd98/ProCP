@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProCP
 {
-    public class Intersection : Road
+    public class Intersection : Crossing
     {
         private int lengthSmallSqSide;
         private int lengthBigSqSide;
@@ -26,25 +26,25 @@ namespace ProCP
         {
             int quarter = lengthBigSqSide / 4;
 
-            MPIN1X = CenterX + lengthSmallSqSide;
-            MPIN1Y = CenterY + quarter;
-            MPOUT1X = CenterX + quarter;
-            MPOUT1Y = CenterY + lengthSmallSqSide;
+            MPIN1X = CCenterX + lengthSmallSqSide;
+            MPIN1Y = CCenterY + quarter;
+            MPOUT1X = CCenterX + quarter;
+            MPOUT1Y = CCenterY + lengthSmallSqSide;
 
-            MPIN2X = CenterX - quarter;
-            MPIN2Y = CenterY + lengthSmallSqSide;
-            MPOUT2X = CenterX - lengthSmallSqSide;
-            MPOUT2Y = CenterY + quarter;
+            MPIN2X = CCenterX - quarter;
+            MPIN2Y = CCenterY + lengthSmallSqSide;
+            MPOUT2X = CCenterX - lengthSmallSqSide;
+            MPOUT2Y = CCenterY + quarter;
 
-            MPIN3X = CenterX - lengthSmallSqSide;
-            MPIN3Y = CenterY - quarter;
-            MPOUT3X = CenterX - quarter;
-            MPOUT3Y = CenterY - lengthSmallSqSide;
+            MPIN3X = CCenterX - lengthSmallSqSide;
+            MPIN3Y = CCenterY - quarter;
+            MPOUT3X = CCenterX - quarter;
+            MPOUT3Y = CCenterY - lengthSmallSqSide;
 
-            MPIN4X = CenterX + quarter;
-            MPIN4Y = CenterY - lengthSmallSqSide;
-            MPOUT4X = CenterX + lengthSmallSqSide;
-            MPOUT4Y = CenterY - quarter;
+            MPIN4X = CCenterX + quarter;
+            MPIN4Y = CCenterY - lengthSmallSqSide;
+            MPOUT4X = CCenterX + lengthSmallSqSide;
+            MPOUT4Y = CCenterY - quarter;
         }
 
         //Turn right -> same square out

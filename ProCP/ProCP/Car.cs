@@ -14,6 +14,7 @@ namespace ProCP
         private int prev_positionx;
         private int positionY;
         private int prev_positiony;
+        private double netDistance;
         private bool breaks;
         private string ffvar;
 
@@ -50,6 +51,13 @@ namespace ProCP
             {
                 speed++;
             }
+        }
+
+        public void calcNetDistance()
+        {
+            // Net Distance formula -- S = X1 - X - L1
+            // L1 = vehicle length
+            // X1 = leading vehicle
         }
 
         public void MoveForward()
