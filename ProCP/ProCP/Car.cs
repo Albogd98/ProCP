@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace ProCP
 {
-    class Car:TrafficMember
+    public class Car : TrafficMember
     {
         private int speed;
         private int acceleration;
-        private int[] position;
-        private int breakingSpeed;
+        private int positionX;
+        private int prev_positionx;
+        private int positionY;
+        private int prev_positiony;
+        private bool breaks;
+        private string ffvar;
 
         public int Speed
         {
@@ -21,52 +25,132 @@ namespace ProCP
             }
         }
 
-        public Car(int s, int a, int[] ps, int b)
+        public int PositionX { get { return positionX; } set { positionX = value; } }
+        public int PositionY { get { return positionY; } set { positionY = value; } }
+        public string fFVar { get { return ffvar; } set { ffvar = value; } }
+
+        public Car(int s, int a, int px, int py)
         {
             speed = s;
             acceleration = a;
-            position = ps;
-            breakingSpeed = b;
+            positionX = px;
+            positionY = py;
+            breaks = false;
         }
 
         public void Break()
         {
-            throw new System.NotImplementedException();
+            speed = 0;
+            breaks = true;
         }
 
         public void Accelerate()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void CheckPosition()
-        {
-            throw new System.NotImplementedException();
+            while (speed < acceleration)
+            {
+                speed++;
+            }
         }
 
         public void MoveForward()
         {
-            throw new System.NotImplementedException();
+            switch (ffvar)
+            {
+                case "Left":
+                    positionX--;
+                    break;
+                case "Right":
+                    positionX++;
+                    break;
+                case "Up":
+                    positionY++;
+                    break;
+                case "Down":
+                    positionY--;
+                    break;
+            }
         }
 
         public void TurnLeft()
         {
-            throw new System.NotImplementedException();
+            switch (ffvar)
+            {
+                case "Left":
+                    positionX--;
+                    positionY--;
+                    break;
+                case "Right":
+                    positionX++;
+                    positionY++;
+                    break;
+                case "Up":
+                    positionX--;
+                    positionY++;
+                    break;
+                case "Down":
+                    positionX++;
+                    positionY--;
+                    break;
+            }
         }
 
         public void TurnRight()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void GoStraight()
-        {
-            throw new System.NotImplementedException();
+            switch (ffvar)
+            {
+                case "Left":
+                    positionX++;
+                    break;
+                case "Right":
+                    positionX--;
+                    break;
+                case "Up":
+                    positionY--;
+                    break;
+                case "Down":
+                    positionY++;
+                    break;
+            }
         }
 
         public void U_Turn()
         {
-            throw new System.NotImplementedException();
+            switch (ffvar)
+            {
+                case "Left":
+                    positionX++;
+                    break;
+                case "Right":
+                    positionX--;
+                    break;
+                case "Up":
+                    positionY--;
+                    break;
+                case "Down":
+                    positionY++;
+                    break;
+            }
+        }
+
+        public void facingForward(Car c)
+        {
+            if (!breaks)
+            {
+                if (positionX < prev_positionx)
+                {
+                    ffvar = "Left";
+                }
+                else if (positionX > prev_positionx)
+                {
+                    ffvar = "Right";
+                }
+                else if (positionY < prev_positiony)
+                {
+                    ffvar = "Down";
+                }
+                else
+                    ffvar = "Up";
+            }
         }
     }
 }

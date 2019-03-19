@@ -9,7 +9,7 @@ namespace ProCP
     {
         int PositionX { get; set; }
         int PositionY { get; set; }
-        
-
+        string fFVar { get; set; }
+        void facingForward(Car c);
     }
 }
