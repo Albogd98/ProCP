@@ -11,129 +11,78 @@ namespace ProCP
         private int _speed;
         private int _acceleration;
         private Position _current;
-        private Position _previous;
         private double _netDistance;
-        private bool _breaks;
+        private int _length;
+        private bool _brakes;
 
-        public int Speed
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
+        public int _Speed { get { return _speed; } }
+        
 
         public int PositionX { get { return _current.X; } set { _current.X = value; } }
         public int PositionY { get { return _current.Y; } set { _current.Y = value; } }
 
-        public Car(int s, int a, int px, int py)
+        public Car(int s, int a, int px, int py, int l)
         {
-            _speed = s;
-            _acceleration = a;
-            _current.X = px;
-            _current.Y = py;
-            _breaks = false;
+            this._speed = s;
+            this._acceleration = a;
+            this._current.X = px;
+            this._current.Y = py;
+            this._brakes = false;
         }
 
         public void Break()
         {
-            _speed = 0;
-            _breaks = true;
+            _speed -= 5;
+            _brakes = true;
         }
 
         public void Accelerate()
         {
+
             while (_speed < _acceleration)
             {
                 _speed++;
             }
         }
 
-        public void calcNetDistance()
+        public double calcNetDistance(Car c)
         {
             // Net Distance formula -- S = X1 - X - L1
             // L1 = vehicle length
             // X1 = leading vehicle
+
+            int[] _positionX1 = new int[] { PositionX, PositionY };
+            int[] _positionX2 = new int[] { c.PositionX, c.PositionY };
+            _netDistance = Math.Sqrt(Math.Pow(_positionX2[0] - _positionX1[0], 2) + Math.Pow(_positionX1[1] - _positionX2[1], 2));
+
+            return _netDistance;
+        }
+
+        public bool startBraking()
+        {
+
+
+            return true;
         }
 
         public void MoveForward()
         {
-            switch (_facingForward)
-            {
-                case "Left":
-                    _current.X--;
-                    break;
-                case "Right":
-                    _current.X++;
-                    break;
-                case "Up":
-                    _current.Y++;
-                    break;
-                case "Down":
-                    _current.Y--;
-                    break;
-            }
+            
         }
 
         public void TurnLeft()
         {
-            switch (_facingForward)
-            {
-                case "Left":
-                    _current.X--;
-                    _current.Y--;
-                    break;
-                case "Right":
-                    _current.X++;
-                    _current.Y++;
-                    break;
-                case "Up":
-                    _current.X--;
-                    _current.Y++;
-                    break;
-                case "Down":
-                    _current.X++;
-                    _current.Y--;
-                    break;
-            }
+           
         }
 
         public void TurnRight()
         {
-            switch (_facingForward)
-            {
-                case "Left":
-                    _current.X++;
-                    break;
-                case "Right":
-                    _current.X--;
-                    break;
-                case "Up":
-                    _current.Y--;
-                    break;
-                case "Down":
-                    _current.Y++;
-                    break;
-            }
+            
         }
 
         public void U_Turn()
         {
-            switch (_facingForward)
-            {
-                case "Left":
-                    _current.X++;
-                    break;
-                case "Right":
-                    _current.X--;
-                    break;
-                case "Up":
-                    _current.Y--;
-                    break;
-                case "Down":
-                    _current.Y++;
-                    break;
-            }
+            
         }
     }
 }
