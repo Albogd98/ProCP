@@ -14,6 +14,7 @@ namespace ProCP
         private double _netDistance;
         private int _length;
         private bool _brakes;
+        private bool _checkfront = false;
 
         public int _Speed { get { return _speed; } }
         
@@ -30,9 +31,12 @@ namespace ProCP
             this._brakes = false;
         }
 
-        public void Break()
+        public void Brake()
         {
-            _speed -= 5;
+            while (_speed >= 1)
+            {
+                _speed -= 1;
+            }            
             _brakes = true;
         }
 
@@ -45,7 +49,7 @@ namespace ProCP
             }
         }
 
-        public double calcNetDistance(Car c)
+        public void calcNetDistance(Car c)
         {
             // Net Distance formula -- S = X1 - X - L1
             // L1 = vehicle length
@@ -62,22 +66,13 @@ namespace ProCP
 
             if (_netDistance <= _stopDistance)
             {
-                startBraking();
+                Brake();
             }
-
-            return _netDistance;
-        }
-
-        public bool startBraking()
-        {
-            this._speed -= 5;
-
-            return true;
         }
 
         public void MoveForward()
         {
-            
+            //calcNetDistance();
         }
 
         public void TurnLeft()
