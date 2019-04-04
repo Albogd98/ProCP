@@ -53,14 +53,24 @@ namespace ProCP
 
             int[] _positionX1 = new int[] { PositionX, PositionY };
             int[] _positionX2 = new int[] { c.PositionX, c.PositionY };
-            _netDistance = Math.Sqrt(Math.Pow(_positionX2[0] - _positionX1[0], 2) + Math.Pow(_positionX1[1] - _positionX2[1], 2));
+            _netDistance = Math.Sqrt(Math.Pow( _positionX2[0] - _positionX1[0], 2) + Math.Pow( _positionX1[1] - _positionX2[1], 2));
+
+            // Stopping distance formula
+            // stopDistance = (Velocity^2) / 2(coefficient of friction = 0.7)(gravitational acceleration = 9.8)
+
+            double _stopDistance = this._Speed / 2 * 0.7 * 9.8;
+
+            if (_netDistance <= _stopDistance)
+            {
+                startBraking();
+            }
 
             return _netDistance;
         }
 
         public bool startBraking()
         {
-
+            this._speed -= 5;
 
             return true;
         }

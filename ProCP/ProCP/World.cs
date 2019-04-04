@@ -24,5 +24,16 @@ namespace ProCP
         {
             _cars.Remove(ob);
         }
+
+        public void checkCar(Car myCar)
+        {
+            foreach(Car c in _cars)
+            {
+                if (c.PositionX == myCar.PositionX || c.PositionY == myCar.PositionY)
+                {
+                    myCar.calcNetDistance(c);
+                }
+            }
+        }
     }
 }
