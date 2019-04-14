@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Car : MonoBehaviour
 {
-    [SerializeField] private Transform[] routes;
-    private int _routeToGo;
+    private Transform _routeRight;
+    private Transform _routeLeft;
     private float _tParam;
     private Vector3 _carPosition;
     
@@ -17,7 +17,7 @@ public class Car : MonoBehaviour
     private float _speed = 10;
     private float _acceleration = 1;
     private float _counter = 0;
-    private bool _collided;
+    private string _collided = "";
 
 
     public void Accelerate()
@@ -32,10 +32,9 @@ public class Car : MonoBehaviour
     void Start()
     {
         _speedModifier = 0.5f;
-        _routeToGo = 0;
         _tParam = 0f;
         _coroutineAllowed = true;
-        _collided = false;
+        _collided = "";
 
     }
 
@@ -49,12 +48,21 @@ public class Car : MonoBehaviour
             _counter = 0;
         }*/
 
-        if (_collided)
+        if (_collided != "" && _collided != "Forward" && _coroutineAllowed)
         {
-            _routeToGo = 0;
+            switch(_collided)
+            {
+                case "Left": 
+                    StartCoroutine(GoByTheRoute(_routeLeft, false));
+                    break;
+                case "Right": 
+                    StartCoroutine(GoByTheRoute(_routeRight, true));
+                    break;
+            }
+            
             if (_coroutineAllowed)
             {
-                StartCoroutine(GoByTheRoute(_routeToGo, true));       
+                       
             }
             
         }
@@ -86,14 +94,14 @@ public class Car : MonoBehaviour
         newCar.transform.position = new Vector3(0,0,1.64f);
     }
 
-    private IEnumerator GoByTheRoute(int routeNumber, bool turningRight)
+    private IEnumerator GoByTheRoute(Transform route, bool turningRight)
     {
         _coroutineAllowed = false;
 
-        Vector3 p0 = routes[routeNumber].GetChild(0).position;
-        Vector3 p1 = routes[routeNumber].GetChild(1).position;
-        Vector3 p2 = routes[routeNumber].GetChild(2).position;
-        Vector3 p3 = routes[routeNumber].GetChild(3).position;
+        Vector3 p0 = route.GetChild(0).position;
+        Vector3 p1 = route.GetChild(1).position;
+        Vector3 p2 = route.GetChild(2).position;
+        Vector3 p3 = route.GetChild(3).position;
 
         float startingAngle = transform.localEulerAngles.y;
         startingAngle = (startingAngle > 180) ? startingAngle - 360 : startingAngle;
@@ -125,19 +133,26 @@ public class Car : MonoBehaviour
 
         _tParam = 0f;
 
-        _routeToGo += 1;
+        /*_routeToGo += 1;
 
         if (_routeToGo > routes.Length - 1)
             _routeToGo = 0;
 
+        */
+
         _coroutineAllowed = true;
-        _collided = false;
+        _collided = "";
     }
 
     void OnCollisionEnter(Collision col)
     {
+        int randNumber = Random.Range(0, 3);
+    
         _speed = 1;
-        _collided = true;
+        _collided = col.gameObject.name;
+        _routeLeft = col.gameObject.GetComponent<TurnController>().leftRoute;
+        _routeRight = col.gameObject.GetComponent<TurnController>().rightRoute;
+        col.gameObject.name = randNumber == 0 ? "Left" : randNumber == 1 ? "Right" : "Forward";
     }
     
 
