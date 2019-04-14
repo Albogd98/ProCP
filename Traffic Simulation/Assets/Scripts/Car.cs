@@ -110,12 +110,10 @@ public class Car : MonoBehaviour
 
             if(turningRight && angle - startingAngle <= 90f)
             {
-                Debug.Log("tr");
-
                 transform.Rotate(0, 1f, 0);
-            } else if(!turningRight && startingAngle - angle <= 90f)
+            } 
+            else if(!turningRight && startingAngle - angle <= 90f)
             {
-                Debug.Log("tl");
                 transform.Rotate(0, -1f, 0);
             }
 
