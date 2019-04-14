@@ -53,7 +53,10 @@ public class Car : MonoBehaviour
         {
             _routeToGo = 0;
             if (_coroutineAllowed)
-            StartCoroutine(GoByTheRoute(_routeToGo));
+            {
+                StartCoroutine(GoByTheRoute(_routeToGo, true));       
+            }
+            
         }
         else
         {
@@ -83,7 +86,7 @@ public class Car : MonoBehaviour
         newCar.transform.position = new Vector3(0,0,1.64f);
     }
 
-    private IEnumerator GoByTheRoute(int routeNumber)
+    private IEnumerator GoByTheRoute(int routeNumber, bool turningRight)
     {
         _coroutineAllowed = false;
 
