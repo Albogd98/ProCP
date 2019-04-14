@@ -92,6 +92,9 @@ public class Car : MonoBehaviour
         Vector3 p2 = routes[routeNumber].GetChild(2).position;
         Vector3 p3 = routes[routeNumber].GetChild(3).position;
 
+        float startingAngle = transform.localEulerAngles.y;
+        startingAngle = (startingAngle > 180) ? startingAngle - 360 : startingAngle;
+
         while (_tParam < 1)
         {
             _tParam += Time.deltaTime * _speedModifier;
@@ -101,9 +104,20 @@ public class Car : MonoBehaviour
                            3 * (1 - _tParam) * Mathf.Pow(_tParam, 2) * p2 +
                            Mathf.Pow(_tParam, 3) * p3;
             transform.position = _carPosition;
-            transform.Rotate(0, 0.30f, 0);
-            
-            
+
+            float angle = transform.localEulerAngles.y;
+            angle = (angle > 180) ? angle - 360 : angle;
+
+            if(turningRight && angle - startingAngle <= 90f)
+            {
+                Debug.Log("tr");
+
+                transform.Rotate(0, 1f, 0);
+            } else if(!turningRight && startingAngle - angle <= 90f)
+            {
+                Debug.Log("tl");
+                transform.Rotate(0, -1f, 0);
+            }
 
             yield return new WaitForEndOfFrame();
         }
