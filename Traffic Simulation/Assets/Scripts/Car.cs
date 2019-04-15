@@ -14,7 +14,7 @@ public class Car : MonoBehaviour
     private bool _coroutineAllowed;
 
     private float _speedModifier;
-    private float _speed = 10;
+    private float _speed = 2;
     private float _acceleration = 1;
     private float _counter = 0;
     private bool _collided;
@@ -42,13 +42,6 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _counter += Time.deltaTime;
-        if (_counter >= 5)
-        {
-            Invoke();
-            _counter = 0;
-        }
-
         if (_collided)
         {
             _routeToGo = Random.Range(0, 2);
@@ -105,6 +98,7 @@ public class Car : MonoBehaviour
                            3 * (1 - _tParam) * Mathf.Pow(_tParam, 2) * p2 +
                            Mathf.Pow(_tParam, 3) * p3;
             transform.position = _carPosition;
+            transform.Translate(0, 0, _speed * Time.deltaTime);
 
             /*float angle = transform.localEulerAngles.y;
             angle = (angle > 180) ? angle - 360 : angle;
@@ -119,7 +113,7 @@ public class Car : MonoBehaviour
                 if (angle - _startingAngle <= 90f)
                     transform.Rotate(0, -0.33f, 0);
             }*/
-            
+
 
 
             yield return new WaitForEndOfFrame();
@@ -174,9 +168,14 @@ public class Car : MonoBehaviour
             routes[0] = GameObject.Find("TurnRight4").transform;
             routes[1] = GameObject.Find("TurnLeft4").transform;
         }
-        else if (col.gameObject.name == "DestroyCube" || col.gameObject.name == "DestroyCube1")
+        else if (col.gameObject.name == "DestroyCube")
         {
             print("collision");
+            Destroy(gameObject);
+        }
+        else if (col.gameObject.name == "Cube")
+        {
+            print("collision detected");
             Destroy(gameObject);
         }
 
