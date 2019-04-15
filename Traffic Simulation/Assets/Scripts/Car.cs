@@ -51,7 +51,7 @@ public class Car : MonoBehaviour
 
         if (_collided)
         {
-            _routeToGo = 0;
+            _routeToGo = Random.Range(0,2);
             if (_coroutineAllowed)
             StartCoroutine(GoByTheRoute(_routeToGo));
         }
