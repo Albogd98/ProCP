@@ -42,12 +42,12 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*_counter += Time.deltaTime;
+        _counter += Time.deltaTime;
         if (_counter >= 5)
         {
             Invoke();
             _counter = 0;
-        }*/
+        }
 
         if (_collided)
         {
@@ -106,7 +106,7 @@ public class Car : MonoBehaviour
                            Mathf.Pow(_tParam, 3) * p3;
             transform.position = _carPosition;
 
-            float angle = transform.localEulerAngles.y;
+            /*float angle = transform.localEulerAngles.y;
             angle = (angle > 180) ? angle - 360 : angle;
 
             if (_routeNumber == 0)
@@ -117,8 +117,8 @@ public class Car : MonoBehaviour
             else if (_routeNumber == 1)
             {
                 if (angle - _startingAngle <= 90f)
-                    transform.Rotate(0, -0.75f, 0);
-            }
+                    transform.Rotate(0, -0.33f, 0);
+            }*/
             
 
 
@@ -127,10 +127,22 @@ public class Car : MonoBehaviour
 
         _tParam = 0f;
 
-        _routeToGo += 1;
+        /*_routeToGo += 1;
 
         if (_routeToGo > routes.Length - 1)
-            _routeToGo = 0;
+            _routeToGo = 0; */
+
+        if (_routeNumber == 0)
+        {
+            transform.Rotate(0, 90, 0);
+        }
+        else if (_routeNumber == 1)
+        {
+            transform.Rotate(0, -90, 0);
+        }
+        
+
+   
 
         _coroutineAllowed = true;
         _collided = false;
@@ -138,22 +150,38 @@ public class Car : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        _speed = 1;
+        _speed = 3;
         _collided = true;
 
         if  (col.gameObject.name == "Cube1")
         {
-            _cuberNumber = 1;
             GameObject myObject = GameObject.Find("Cube1");
             routes[0] = GameObject.Find("TurnRight1").transform;
             routes[1] = GameObject.Find("TurnLeft1").transform;
         }
         else if (col.gameObject.name == "Cube2")
         {
-            _cuberNumber = 2;
             routes[0] = GameObject.Find("TurnRight2").transform;
             routes[1] = GameObject.Find("TurnLeft2").transform;
         }
+        else if (col.gameObject.name == "Cube3")
+        {
+            routes[0] = GameObject.Find("TurnRight3").transform;
+            routes[1] = GameObject.Find("TurnLeft3").transform;
+        }
+        else if (col.gameObject.name == "Cube4")
+        {
+            routes[0] = GameObject.Find("TurnRight4").transform;
+            routes[1] = GameObject.Find("TurnLeft4").transform;
+        }
+        else if (col.gameObject.name == "DestroyCube" || col.gameObject.name == "DestroyCube1")
+        {
+            print("collision");
+            Destroy(gameObject);
+        }
+
+
+
     }
     
 
