@@ -18,7 +18,7 @@ public class Car : MonoBehaviour
     private float _acceleration = 1;
     private float _counter = 0;
     private bool _collided;
-
+    private int _cuberNumber;
 
     public void Accelerate()
     {
@@ -51,7 +51,7 @@ public class Car : MonoBehaviour
 
         if (_collided)
         {
-            _routeToGo = Random.Range(1, 2);
+            _routeToGo = Random.Range(0, 2);
             if (_coroutineAllowed)
             StartCoroutine(GoByTheRoute(_routeToGo));
         }
@@ -117,7 +117,7 @@ public class Car : MonoBehaviour
             else if (_routeNumber == 1)
             {
                 if (angle - _startingAngle <= 90f)
-                    transform.Rotate(0, -0.74f, 0);
+                    transform.Rotate(0, -0.75f, 0);
             }
             
 
@@ -140,6 +140,20 @@ public class Car : MonoBehaviour
     {
         _speed = 1;
         _collided = true;
+
+        if  (col.gameObject.name == "Cube1")
+        {
+            _cuberNumber = 1;
+            GameObject myObject = GameObject.Find("Cube1");
+            routes[0] = GameObject.Find("TurnRight1").transform;
+            routes[1] = GameObject.Find("TurnLeft1").transform;
+        }
+        else if (col.gameObject.name == "Cube2")
+        {
+            _cuberNumber = 2;
+            routes[0] = GameObject.Find("TurnRight2").transform;
+            routes[1] = GameObject.Find("TurnLeft2").transform;
+        }
     }
     
 
