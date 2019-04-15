@@ -51,7 +51,7 @@ public class Car : MonoBehaviour
 
         if (_collided)
         {
-            _routeToGo = Random.Range(0,2);
+            _routeToGo = Random.Range(1, 2);
             if (_coroutineAllowed)
             StartCoroutine(GoByTheRoute(_routeToGo));
         }
@@ -83,14 +83,18 @@ public class Car : MonoBehaviour
         newCar.transform.position = new Vector3(0,0,1.64f);
     }
 
-    private IEnumerator GoByTheRoute(int routeNumber)
+    private IEnumerator GoByTheRoute(int _routeNumber)
     {
         _coroutineAllowed = false;
 
-        Vector3 p0 = routes[routeNumber].GetChild(0).position;
-        Vector3 p1 = routes[routeNumber].GetChild(1).position;
-        Vector3 p2 = routes[routeNumber].GetChild(2).position;
-        Vector3 p3 = routes[routeNumber].GetChild(3).position;
+        Vector3 p0 = routes[_routeNumber].GetChild(0).position;
+        Vector3 p1 = routes[_routeNumber].GetChild(1).position;
+        Vector3 p2 = routes[_routeNumber].GetChild(2).position;
+        Vector3 p3 = routes[_routeNumber].GetChild(3).position;
+
+        float _startingAngle = transform.localEulerAngles.y;
+        _startingAngle = (_startingAngle > 180) ? _startingAngle - 360 : _startingAngle;
+
 
         while (_tParam < 1)
         {
@@ -101,9 +105,22 @@ public class Car : MonoBehaviour
                            3 * (1 - _tParam) * Mathf.Pow(_tParam, 2) * p2 +
                            Mathf.Pow(_tParam, 3) * p3;
             transform.position = _carPosition;
-            transform.Rotate(0, 0.30f, 0);
+
+            float angle = transform.localEulerAngles.y;
+            angle = (angle > 180) ? angle - 360 : angle;
+
+            if (_routeNumber == 0)
+            {
+                if (angle - _startingAngle <= 90f)
+                    transform.Rotate(0, 1f, 0);
+            }
+            else if (_routeNumber == 1)
+            {
+                if (angle - _startingAngle <= 90f)
+                    transform.Rotate(0, -0.74f, 0);
+            }
             
-            
+
 
             yield return new WaitForEndOfFrame();
         }
