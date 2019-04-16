@@ -42,7 +42,7 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!checkFront())
+        if (!CheckFront())
         {
             if (_collided)
             {
@@ -52,7 +52,7 @@ public class Car : MonoBehaviour
             }
             else
             {
-                moveForward();
+                MoveForward();
             }
         }
         
@@ -60,14 +60,14 @@ public class Car : MonoBehaviour
     }
 
 
-    bool checkFront()
+    private bool CheckFront()
     {
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             if (hit.distance > 2f)
-            {
-                moveForward();
+            {                
+                return false;
             }
             return true;
 
@@ -79,7 +79,7 @@ public class Car : MonoBehaviour
     }
 
 
-    void moveForward()
+    void MoveForward()
     {
         transform.Translate(0, 0, _speed * Time.deltaTime);
     }
