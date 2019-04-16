@@ -124,8 +124,8 @@ public class Car : MonoBehaviour
             }
             else if (_routeNumber == 1)
             {
-                if (angle - _startingAngle <= 90f)
-                    transform.Rotate(0, -0.33f, 0);
+                if (_startingAngle - angle <= 90f)
+                    transform.Rotate(0, -1f, 0);
             }
 
 
