@@ -5,7 +5,7 @@ using UnityEngine.Experimental.UIElements;
 
 public class SpawnCars : MonoBehaviour
 {
-    private float _timer = 5;
+    private float _timer = 2;
     public GameObject _car;
 
 
@@ -22,7 +22,7 @@ public class SpawnCars : MonoBehaviour
         if (_timer <= 0)
         {
             Instantiate(_car, new Vector3(2,0,2.31f), transform.rotation);
-            _timer = 5;
+            _timer = 2;
         }
     }
 }

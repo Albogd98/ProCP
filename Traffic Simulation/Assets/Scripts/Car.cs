@@ -42,32 +42,46 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_collided)
+        if (!checkFront())
         {
-            _routeToGo = Random.Range(0, 2);
-            if (_coroutineAllowed)
-            StartCoroutine(GoByTheRoute(_routeToGo));
+            if (_collided)
+            {
+                _routeToGo = Random.Range(0, 3);
+                if (_coroutineAllowed)
+                    StartCoroutine(GoByTheRoute(_routeToGo));
+            }
+            else
+            {
+                moveForward();
+            }
         }
-        else
-        {
-            moveForward();
-        }
+        
+
     }
-    void moveForward()
+
+
+    bool checkFront()
     {
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             if (hit.distance > 2f)
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                transform.Translate(0, 0, _speed * Time.deltaTime);
+                moveForward();
             }
+            return true;
+
         }
         else
         {
-            transform.Translate(0, 0, _speed * Time.deltaTime);
+            return false;
         }
+    }
+
+
+    void moveForward()
+    {
+        transform.Translate(0, 0, _speed * Time.deltaTime);
     }
 
     void Invoke()
@@ -100,7 +114,7 @@ public class Car : MonoBehaviour
             transform.position = _carPosition;
             transform.Translate(0, 0, _speed * Time.deltaTime);
 
-            /*float angle = transform.localEulerAngles.y;
+            float angle = transform.localEulerAngles.y;
             angle = (angle > 180) ? angle - 360 : angle;
 
             if (_routeNumber == 0)
@@ -112,7 +126,7 @@ public class Car : MonoBehaviour
             {
                 if (angle - _startingAngle <= 90f)
                     transform.Rotate(0, -0.33f, 0);
-            }*/
+            }
 
 
 
@@ -121,19 +135,15 @@ public class Car : MonoBehaviour
 
         _tParam = 0f;
 
-        /*_routeToGo += 1;
 
-        if (_routeToGo > routes.Length - 1)
-            _routeToGo = 0; */
-
-        if (_routeNumber == 0)
+        /*if (_routeNumber == 0)
         {
             transform.Rotate(0, 90, 0);
         }
         else if (_routeNumber == 1)
         {
             transform.Rotate(0, -90, 0);
-        }
+        }*/
         
 
    
@@ -152,6 +162,7 @@ public class Car : MonoBehaviour
             GameObject myObject = GameObject.Find("Cube1");
             routes[0] = GameObject.Find("TurnRight1").transform;
             routes[1] = GameObject.Find("TurnLeft1").transform;
+            routes[2] = GameObject.Find("GoStraight1").transform;
         }
         else if (col.gameObject.name == "Cube2")
         {
@@ -168,7 +179,7 @@ public class Car : MonoBehaviour
             routes[0] = GameObject.Find("TurnRight4").transform;
             routes[1] = GameObject.Find("TurnLeft4").transform;
         }
-        else if (col.gameObject.name == "DestroyCube")
+        else if (col.gameObject.name == "Cube1")
         {
             print("collision");
             Destroy(gameObject);

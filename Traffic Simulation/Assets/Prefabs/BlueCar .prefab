@@ -124,6 +124,7 @@ MonoBehaviour:
   routes:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
 --- !u!54 &2353629725168126083
 Rigidbody:
   m_ObjectHideFlags: 0
