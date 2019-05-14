@@ -10,12 +10,12 @@ namespace ProCP
         private Position _inPoint;
         private Position _outPoint;
 
-        public Position InPoint
+        /*public Position InPoint
         {
             /*get => default(int);
             set
             {
-            }*/
+            }
         }
 
         public Position OutPoint
@@ -23,7 +23,7 @@ namespace ProCP
             /*get => default(int);
             set
             {
-            }*/
-        }
+            }
+        }*/
     }
 }

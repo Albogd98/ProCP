@@ -7,18 +7,18 @@ namespace ProCP
 {
     public class Intersection : Road
     {
-        private IntersectionSquare _squareOne;
+        /*private IntersectionSquare _squareOne;
         private IntersectionSquare _squareTwo;
         private IntersectionSquare _squareThree;
-        private IntersectionSquare _squareFour;
+        private IntersectionSquare _squareFour;*/
 
-        public Intersection(int cX, int cY)
+        /*public Intersection(int cX, int cY)
             :base(cX, cY)
         {
             lengthBigSqSide = 20;
             lengthSmallSqSide = lengthBigSqSide / 2;
             GetMidPoints();
-        }
+        }*/
 
         //Turn right -> same square out
         //Turn left -> if 1/2 then +2 index out or if 3/4 then -2 index out
